@@ -13,13 +13,6 @@ const ItemList = ({items}) => {
                 <NavLink to={`/item/${item.id}`} className="custom-link btn btn-outline-secondary">Detalles</NavLink>
               </div>
           </li>
-          // <li key={item.id}>
-          //   <Link to={`/item/${item.id}`}>
-          //     <h3></h3>
-          //     <p>${item.price}</p>
-          //     <p>{item.category}</p>
-          //   </Link>
-          // </li>
         ))}
       </ul>
     </div>
