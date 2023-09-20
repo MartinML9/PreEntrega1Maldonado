@@ -1,19 +1,37 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts } from "../../services/services";
+import { getProducts } from "../../services/productService";
 import ItemList from "./ItemList";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState([]);
+  const [errorMessage, setErrorMessage] = useState([]);
   const { categoryId } = useParams();
 
   useEffect(() => {
-      getProducts(categoryId).then((products) => {
+    setIsLoading(true);
+    setItems([]);
+
+    getProducts(categoryId)
+      .then((products) => {
         setItems(products);
+      })
+      .catch((error) => {
+        setErrorMessage(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [categoryId]);
 
-  return <ItemList items={items} />;
+  return (
+    <>
+      {isLoading && <p>Cargando productos...</p>}
+      {errorMessage && <p>{errorMessage}</p>}
+      {items ? <ItemList items={items} /> : <p>{errorMessage}</p>}
+    </>
+  );
 };
 
 export default ItemListContainer;

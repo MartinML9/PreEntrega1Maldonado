@@ -10,3 +10,5 @@ const CartWidget = () => {
 }
 
 export default CartWidget
+
+{ buyer: { name, phone, email }, items: [{id, title, price}], total};
