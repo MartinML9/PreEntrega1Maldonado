@@ -1,11 +1,16 @@
-import cart from "./assets/cart.svg"
+import cartIcon from "./assets/cart.svg"
+import { useContext } from "react"
+import cartContext from "../../context/CartContext"
+import { Link } from "react-router-dom";
 
 const CartWidget = () => {
+    const {getCartQuantity} = useContext(cartContext);
+    const quantity = getCartQuantity();
     return (
-        <div className="d-flex">
-            <img style={{ height: "1.5rem", paddingRight: "5px" }} src={cart} alt="cart-widget" />
-            0
-        </div>
+        <Link to="/cart" className="d-flex align-items-center fs-4 nav-link" >
+            <img style={{ height: "1.7rem", paddingRight: "5px" }} src={cartIcon} alt="cart-widget" />
+            {!!quantity && quantity}
+        </Link>
     )
 }
 
